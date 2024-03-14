@@ -17,7 +17,7 @@ public class GameCanvas extends Canvas implements Runnable {
 // Setting Final initial position of Player 
 	public static final int PLAYER_INITIAL_X = 0 , PLAYER_INITIAL_Y=0;
 // Creating Variable to store total number of power ups in game
-	public static int total_powerup=3;
+	public static int total_powerup=50;
 // creating Vars to store width and height of game	
 	public static final int GAME_WIDTH = 960, GAME_HEIGHT = 540;  
 //Gameobject background , player and camera are created	
@@ -51,8 +51,8 @@ public class GameCanvas extends Canvas implements Runnable {
 		for (int i =0 ; i <total_powerup;i++) {
 		   
 			//For x,y co-ordiants of powerup as we want them scattered around the place on screen
-			int randomX = random.nextInt(GAME_WIDTH-powerup_error_width); // Generates a random x between 0 and 760
-            int randomY = random.nextInt(GAME_HEIGHT-powerup_error_heigth); // Generates a random y between 0 and 340
+			int randomX = random.nextInt(GAME_WIDTH-(powerup_error_width*2)); // Generates a random x between 0 and 760
+            int randomY = random.nextInt(GAME_HEIGHT-(powerup_error_heigth*2)); // Generates a random y between 0 and 340
             // local instances to store them inside hashmap
             PowerUp powerup = new PowerUp(randomX, randomY);
             Rectangle powerUpBounds = new Rectangle((int) powerup.getX(), (int) powerup.getY(), powerup.getPowerUpWidth(), powerup.getPowerUpHeight());

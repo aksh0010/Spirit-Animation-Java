@@ -112,10 +112,10 @@ public class Player extends GameObject {
 			// if the keyboard right is pressed the we 
 			// update the x co-ordinate and call right animator
 					x += 2;
-					if (x +player_width> GameCanvas.GAME_WIDTH )// Also we check if the player is within the bounds of screen
+					if (x +ERROR+player_width> GameCanvas.GAME_WIDTH )// Also we check if the player is within the bounds of screen
 						
 					{
-						x = GameCanvas.GAME_WIDTH-player_width;
+						x = GameCanvas.GAME_WIDTH-player_width-ERROR;
 					}
 					rightAnimator.tick();
 		
@@ -135,10 +135,10 @@ public class Player extends GameObject {
 			// update the y co-ordinate and call down animator
 					
 				y += 2;
-				 if( y +player_height>GameCanvas.GAME_HEIGHT)// Also we check if the player is within the bounds of screen
+				 if( y +ERROR+player_height>GameCanvas.GAME_HEIGHT)// Also we check if the player is within the bounds of screen
 						
 				 {
-					 y = GameCanvas.GAME_HEIGHT-player_height;
+					 y = GameCanvas.GAME_HEIGHT-player_height-ERROR;
 				 }
 				downAnimator.tick();
 		// 	if no key if pressed we simply call idle animator	
@@ -165,8 +165,8 @@ public class Player extends GameObject {
 			g2d.drawImage(leftAnimator.currentFrame, (int) x, (int) y, player_width, player_height, null);
 		} else  if(GameCanvas.keyboard.right) {
 //			Checking for keyboard right key
-
-			g2d.drawImage(rightAnimator.currentFrame, (int) x, (int) y, player_width, player_height, null);
+			g2d.drawImage(rightAnimator.currentFrame, (int) (x + player_width), (int) y, -player_width, player_height, null);
+//			g2d.drawImage(rightAnimator.currentFrame, (int) x, (int) y, player_width, player_height, null);
 		
 		} else if(GameCanvas.keyboard.up){
 //			Checking for keyboard up key
