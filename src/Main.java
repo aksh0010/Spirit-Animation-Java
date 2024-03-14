@@ -1,0 +1,20 @@
+import javax.swing.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+		JFrame mainWindow = new JFrame("Sprite Animation");
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainWindow.setSize(GameCanvas.GAME_WIDTH, GameCanvas.GAME_HEIGHT);
+		mainWindow.setLocationRelativeTo(null);
+		mainWindow.setResizable(false);
+		System.out.println(GameCanvas.arraylist_powerUps_Bounds);
+		GameCanvas gameCanvas = new GameCanvas();
+		
+		mainWindow.add(gameCanvas);
+		System.out.println(GameCanvas.arraylist_powerUps_Bounds);
+		mainWindow.setVisible(true);
+
+		gameCanvas.start();
+	}
+}
