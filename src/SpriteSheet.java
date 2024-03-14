@@ -1,11 +1,15 @@
 import java.awt.image.*;
 import java.util.Arrays;
-
+/*SpriteSheet
+ * Here we get images from the frames
+ * */
 public class SpriteSheet {
 	
 	public BufferedImage[] images;
 	private BufferedImage source;
-
+	// _____________________________________________________________________
+	// _____________________________________________________________________
+	  
 	public SpriteSheet(String filepath, int rows, int columns, int cellWidth, int cellHeight) {
 		source = ImageLoader.loadImage(filepath);
 		images = new BufferedImage[rows * columns];
@@ -19,7 +23,9 @@ public class SpriteSheet {
 			}
 		}
 	}
-
+	// _____________________________________________________________________
+	// _____________________________________________________________________
+	  
 	public BufferedImage[] getImagesFrom(int startIndex, int endIndex) {
 		return Arrays.copyOfRange(images, startIndex, endIndex + 1);
 	}

@@ -1,7 +1,9 @@
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
-
+/* ImageLoader
+ * Image loader to load images from spirit sheet
+ * */
 public class ImageLoader {
 
 	public static BufferedImage loadImage(String filepath) {

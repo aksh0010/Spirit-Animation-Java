@@ -1,5 +1,9 @@
-public class Camera extends GameObject {
 
+/*Camera
+ * Component in a game where it main objective is to focus on other component for view
+ * */
+public class Camera extends GameObject {
+	
 	public GameObject target;
 	private int offsetX; // Offset to center player horizontally
 	private int offsetY; // Offset to center player vertically
@@ -10,7 +14,8 @@ public class Camera extends GameObject {
 		offsetX = (int) ((GameCanvas.GAME_WIDTH - target.x) / 2);
         offsetY = (int) ((GameCanvas.GAME_HEIGHT - target.y) / 2);
 	}
-	
+	// _____________________________________________________________________
+	// _____________________________________________________________________
 	@Override
 	public void tick() {
 		x = target.x - offsetX;
