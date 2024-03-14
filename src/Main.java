@@ -8,11 +8,11 @@ public class Main {
 		mainWindow.setSize(GameCanvas.GAME_WIDTH, GameCanvas.GAME_HEIGHT);
 		mainWindow.setLocationRelativeTo(null);
 		mainWindow.setResizable(false);
-		System.out.println(GameCanvas.arraylist_powerUps_Bounds);
+//		System.out.println(GameCanvas.arraylist_powerUps_Bounds);
 		GameCanvas gameCanvas = new GameCanvas();
 		
 		mainWindow.add(gameCanvas);
-		System.out.println(GameCanvas.arraylist_powerUps_Bounds);
+//		System.out.println(GameCanvas.arraylist_powerUps_Bounds);
 		mainWindow.setVisible(true);
 
 		gameCanvas.start();

@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.image.*;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 public class Player extends GameObject {
 
@@ -16,21 +18,25 @@ public class Player extends GameObject {
 		// array of Idle frames from the playersheet
 		BufferedImage[] idleFrames = Resources.playerSheet.getImagesFrom(0, 6);
 		idleAnimator = new Animator(idleFrames, 0, idleFrames.length-1);
+//idleFrames.length-1
 	
 		// array of left frames from playersheet 
 		BufferedImage[] leftFrames = Resources.playerSheet.getImagesFrom(8, 31);
-		leftAnimator = new Animator(leftFrames, 0, leftFrames.length-1);
+		leftAnimator = new Animator(leftFrames, 0,1 );
+		
+//		leftFrames.length-1
 		// array of right frames from playersheet 
 		BufferedImage[] rightFrames = Resources.playerSheet.getImagesFrom(8, 31);
-		rightAnimator= new Animator(rightFrames, 0, rightFrames.length-1);
-	
+		rightAnimator= new Animator(rightFrames, 0,1 );
+	//rightFrames.length-1
 		// array of up frames from playersheet 
 		BufferedImage[] upFrames = Resources.playerSheet.getImagesFrom(40, 47);
 		upAnimator = new Animator(upFrames, 0, upFrames.length-1);
-	
+//upFrames.length-1
 		// array of down frames from playersheet 
 		BufferedImage[] downFrames = Resources.playerSheet.getImagesFrom(32, 39);
 		downAnimator = new Animator(downFrames, 0, downFrames.length-1);
+		//downFrames.length-1
 	
 	
 	
@@ -38,29 +44,61 @@ public class Player extends GameObject {
 	
 	
 	//  collision detection  between player and all powerups
-	public void collision_detection() {
-		
-		Rectangle player_rectangle = new Rectangle((int)x, (int)y, player_width-ERROR, player_height-ERROR);
-		
-		  for (Rectangle powerUpBound : GameCanvas.arraylist_powerUps_Bounds) {
-		        if (player_rectangle.intersects(powerUpBound)) {
-		            // Handle collision (e.g., power-up collected, player takes damage, etc.)
-		       
-		        	System.out.println("Collision detected");
-		        	System.out.println("bound of player "+ player_rectangle);
-		        	
-		        	System.out.println("Bounds of powerup "+powerUpBound);
-		        	// You can add your custom logic here
-		        }
-		    }
-		
-	}
-//	private boolean checkCollision(Rectangle rect1, Rectangle rect2) {
-//	    return rect1.getX() < rect2.getX() + rect2.getWidth() &&
-//	           rect1.getX() + rect1.getWidth() > rect2.getX() &&
-//	           rect1.getY() < rect2.getY() + rect2.getHeight() &&
-//	           rect1.getY() + rect1.getHeight() > rect2.getY();
+//	public void collision_detection() {
+//		
+//		Rectangle player_rectangle = new Rectangle((int)x, (int)y, player_width-ERROR, player_height-ERROR);
+//		
+//		  for (Rectangle local_powerUpBound : GameCanvas.hashmap_powerup.values()) {
+//		        if (player_rectangle.intersects(local_powerUpBound)) {
+//		            // Handle collision (with, power-up collected)
+//		       
+//		        	System.out.println("Collision detected");
+//
+//		        	for (Entry<PowerUp, Rectangle> entry : GameCanvas.hashmap_powerup.entrySet()) {
+//		                // If the given value is equal to the value from the entry,
+//		                // print the corresponding key
+//		                if (entry.getValue() == local_powerUpBound) {
+//		                    System.out.println("The key for value " + local_powerUpBound + " is " + entry.getKey());
+//	                   
+////		                    GameCanvas.removing_powerup_from_player(entry.getKey());
+//		                    
+//		                    break;
+//		                }
+//		            }
+//		        	System.out.println("bound of player "+ player_rectangle);
+//		        	System.out.println("Bounds of powerup "+local_powerUpBound);
+//		        	
+//		        }
+//		    }
+//		
 //	}
+	
+	public void collision_detection() {
+	    Rectangle player_rectangle = new Rectangle((int)x, (int)y, player_width-ERROR, player_height-ERROR);
+	    
+	    Iterator<Entry<PowerUp, Rectangle>> iterator = GameCanvas.hashmap_powerup.entrySet().iterator();
+	    while (iterator.hasNext()) {
+	        Entry<PowerUp, Rectangle> entry = iterator.next();
+	        Rectangle local_powerUpBound = entry.getValue();
+	        
+	        if (player_rectangle.intersects(local_powerUpBound)) {
+	            // Handle collision (with, power-up collected)
+	            System.out.println("Collision detected");
+	            System.out.println("The key for value " + local_powerUpBound + " is " + entry.getKey());
+
+	            // Remove from the hashmap
+	            iterator.remove(); // Safe removal while iterating
+
+	            // Remove from the GameManager
+	            GameCanvas.removing_powerup_from_player(entry.getKey());
+
+	            System.out.println("bound of player "+ player_rectangle);
+	            System.out.println("Bounds of powerup "+local_powerUpBound);
+	        }
+	    }
+	}
+
+
 	
 	@Override
 	public void tick() {

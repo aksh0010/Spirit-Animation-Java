@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.awt.image.*;
 
@@ -15,10 +16,11 @@ public class GameCanvas extends Canvas implements Runnable {
 	public static final int GAME_WIDTH = 960, GAME_HEIGHT = 540;  
 	private Background background = new Background(GAME_WIDTH, GAME_HEIGHT);
 	private Player player = new Player(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
-	public static ArrayList<Rectangle> arraylist_powerUps_Bounds = new ArrayList<>();
-
+//	public static ArrayList<Rectangle> arraylist_powerUps_Bounds = new ArrayList<>();
+	public static HashMap<PowerUp, Rectangle> hashmap_powerup = new HashMap<>() ;
 	
-	private GameManager gameManager = new GameManager();
+	// changed from private to public static
+	private static GameManager gameManager = new GameManager();
 	
 	public static Keyboard keyboard = new Keyboard();
 	public static Camera camera;
@@ -35,14 +37,27 @@ public class GameCanvas extends Canvas implements Runnable {
 
             PowerUp powerup = new PowerUp(randomX, randomY);
             Rectangle powerUpBounds = new Rectangle((int) powerup.getX(), (int) powerup.getY(), powerup.getPowerUpWidth(), powerup.getPowerUpHeight());
-            arraylist_powerUps_Bounds.add(powerUpBounds);
+          
+           if( ! hashmap_powerup.containsKey(powerup)) {
+        	   
+        	   hashmap_powerup.put(powerup, powerUpBounds);
+        	   
+           }
+            System.out.println(hashmap_powerup);
+            
+//            arraylist_powerUps_Bounds.add(powerUpBounds);
 			gameManager.addGameObject(powerup);
 		}
 		
 		
 		this.addKeyListener(keyboard);
 	}
-
+	public static void removing_powerup_from_player(PowerUp local) {
+		
+		gameManager.removeGameObject(local);
+		
+	}
+	
 	public void set_total_powerups(int total) {
 		total_powerup = total;
 		gameManager.tick();
