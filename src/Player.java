@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class Player extends GameObject {
-
+	public static int PLAYER_SCORE=0;
 	private final int player_width = 50;
 	private final int player_height = 50;
 	private final int ERROR=20;
@@ -42,37 +42,6 @@ public class Player extends GameObject {
 	
 	}
 	
-	
-	//  collision detection  between player and all powerups
-//	public void collision_detection() {
-//		
-//		Rectangle player_rectangle = new Rectangle((int)x, (int)y, player_width-ERROR, player_height-ERROR);
-//		
-//		  for (Rectangle local_powerUpBound : GameCanvas.hashmap_powerup.values()) {
-//		        if (player_rectangle.intersects(local_powerUpBound)) {
-//		            // Handle collision (with, power-up collected)
-//		       
-//		        	System.out.println("Collision detected");
-//
-//		        	for (Entry<PowerUp, Rectangle> entry : GameCanvas.hashmap_powerup.entrySet()) {
-//		                // If the given value is equal to the value from the entry,
-//		                // print the corresponding key
-//		                if (entry.getValue() == local_powerUpBound) {
-//		                    System.out.println("The key for value " + local_powerUpBound + " is " + entry.getKey());
-//	                   
-////		                    GameCanvas.removing_powerup_from_player(entry.getKey());
-//		                    
-//		                    break;
-//		                }
-//		            }
-//		        	System.out.println("bound of player "+ player_rectangle);
-//		        	System.out.println("Bounds of powerup "+local_powerUpBound);
-//		        	
-//		        }
-//		    }
-//		
-//	}
-	
 	public void collision_detection() {
 	    Rectangle player_rectangle = new Rectangle((int)x, (int)y, player_width-ERROR, player_height-ERROR);
 	    
@@ -91,7 +60,8 @@ public class Player extends GameObject {
 
 	            // Remove from the GameManager
 	            GameCanvas.removing_powerup_from_player(entry.getKey());
-
+	            PLAYER_SCORE++;
+	            System.out.println("Player Score : "+PLAYER_SCORE);
 	            System.out.println("bound of player "+ player_rectangle);
 	            System.out.println("Bounds of powerup "+local_powerUpBound);
 	        }
@@ -163,7 +133,10 @@ public class Player extends GameObject {
 			} else if (GameCanvas.keyboard.nokey){
 				g2d.drawImage(idleAnimator.currentFrame, (int) x, (int) y, player_width, player_height, null);
 			}
-		
+		 // Draw the player score with yellow color
+	    g2d.setColor(Color.YELLOW);
+	    g2d.setFont(new Font("Arial", Font.BOLD, 20));
+	    g2d.drawString("Score: " + PLAYER_SCORE, 10, 20);
 		
 	}
 }
