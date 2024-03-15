@@ -37,6 +37,8 @@ public class GameManager {
 	    // after the removal of object and might runinto errors
 	    LinkedList<GameObject> gameObjectsCopy = new LinkedList<>(gameObjects);
 	    gameObjectsCopy.forEach(gameObject -> gameObject.render(g2d));
+	    
+//	    gameObjects = gameObjectsCopy;
 	}
 
 	// _____________________________________________________________________
@@ -50,4 +52,18 @@ public class GameManager {
 	public void removeGameObject(GameObject gameObject) {
 		gameObjects.remove(gameObject);
 	}
+	
+	// _____________________________________________________________________
+	// _____________________________________________________________________
+
+	public LinkedList<GameObject> getGameObjects() {
+		return gameObjects;
+	}
+	// _____________________________________________________________________
+	// _____________________________________________________________________
+
+	public void setGameObjects(LinkedList<GameObject> gameObjects) {
+		this.gameObjects = gameObjects;
+	}
+	
 }

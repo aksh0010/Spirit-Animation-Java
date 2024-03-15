@@ -17,12 +17,16 @@ public class Player extends GameObject {
 	private final int ERROR=20;
 	
 	//Creating the Animators for our component
-	private Animator idleAnimator; // for idle position
-	private Animator leftAnimator;// for moving left
-	private Animator rightAnimator;// for moving right
-	private Animator upAnimator;// for moving up
-	private Animator downAnimator;// for moving down
-	
+	private transient Animator idleAnimator; // for idle position
+	private transient Animator leftAnimator;// for moving left
+	private transient Animator rightAnimator;// for moving right
+	private transient Animator upAnimator;// for moving up
+	private transient  Animator downAnimator;// for moving down
+	private transient BufferedImage[] idleFrames ;
+	private transient BufferedImage[] leftFrames ;
+	private transient BufferedImage[] rightFrames ;
+	private transient BufferedImage[] upFrames ;
+	private transient BufferedImage[] downFrames ;
 	// _____________________________________________________________________
 	// _____________________________________________________________________
 	public Player(float x, float y) {
@@ -30,23 +34,23 @@ public class Player extends GameObject {
 		
 		
 		// array of Idle frames from the SpiritSheet
-		BufferedImage[] idleFrames = Resources.playerSheet.getImagesFrom(0, 6);
+		idleFrames = Resources.playerSheet.getImagesFrom(0, 6);
 		idleAnimator = new Animator(idleFrames, 0, idleFrames.length-1);
 	
 		// array of left frames from SpiritSheet 
-		BufferedImage[] leftFrames = Resources.playerSheet.getImagesFrom(8, 31);
+		leftFrames = Resources.playerSheet.getImagesFrom(8, 31);
 		leftAnimator = new Animator(leftFrames, 0,1 );
 	
 		// array of right frames from SpiritSheet 
-		BufferedImage[] rightFrames = Resources.playerSheet.getImagesFrom(8, 31);
+		 rightFrames = Resources.playerSheet.getImagesFrom(8, 31);
 		rightAnimator= new Animator(rightFrames, 0,1 );
 
 		// array of up frames from SpiritSheet 
-		BufferedImage[] upFrames = Resources.playerSheet.getImagesFrom(40, 47);
+		upFrames = Resources.playerSheet.getImagesFrom(40, 47);
 		upAnimator = new Animator(upFrames, 0, upFrames.length-1);
 
 		// array of down frames from SpiritSheet 
-		BufferedImage[] downFrames = Resources.playerSheet.getImagesFrom(32, 39);
+		downFrames = Resources.playerSheet.getImagesFrom(32, 39);
 		downAnimator = new Animator(downFrames, 0, downFrames.length-1);
 	
 	}

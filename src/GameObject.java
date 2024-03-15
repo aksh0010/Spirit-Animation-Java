@@ -1,8 +1,9 @@
 import java.awt.Graphics2D;
+import java.io.Serializable;
 /* GameObject
  * Each elements or component is derrived from this class
  * */
-public class GameObject {
+public class GameObject implements Serializable{
 	// Each gameobject has x,y coordinates 
 	public float x, y;
 

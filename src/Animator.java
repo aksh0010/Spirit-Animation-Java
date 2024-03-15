@@ -1,8 +1,9 @@
 import java.awt.image.*;
+import java.io.Serializable;
 /*Animator
  * Animator class to animate our frames from spiritsheet
  * */
-public class Animator {
+public class Animator implements Serializable{
 	// Vars to store the images and frames of respective game object's frames passed to it
 	public BufferedImage[] frames;
 	public BufferedImage currentFrame;

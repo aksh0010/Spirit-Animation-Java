@@ -6,12 +6,14 @@ import java.awt.image.*;
 public class PowerUp extends GameObject {
 
 	//Creating the Animator for our component
-	private Animator powerAnimator;
+//	private Animator powerAnimator;
 	
 	//setting width and height of our component
 	public static final int power_up_width = 50;
 	public static final int power_up_height = 50;
-	
+	private transient BufferedImage[] idleFrames;
+	private transient Animator powerAnimator;
+
 	// _____________________________________________________________________
 	// _____________________________________________________________________
 	// we are using parameterized constructor to initialize the location of this object
@@ -20,7 +22,7 @@ public class PowerUp extends GameObject {
 
 		// here we are simply loading the animator with the images after extracting with
 		// help of Resources class where we have paths for ours spirit sheet
-		BufferedImage[] idleFrames = Resources.power_upSheet.getImagesFrom(48, 48);
+		idleFrames = Resources.power_upSheet.getImagesFrom(48, 48);
 		// We need animation to begin with first index of array with duration to repaint as 10
 		// as we only have one image it really doesnt matter to repaint much 
 		powerAnimator = new Animator(idleFrames, 0, 10);

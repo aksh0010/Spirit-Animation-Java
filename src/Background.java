@@ -9,8 +9,8 @@ public class Background extends GameObject {
 	private final int background_width = GameCanvas.GAME_WIDTH;
 	private final int background_height = GameCanvas.GAME_HEIGHT;
 //Creating animator for our background
-	private Animator background_Animator;
-    private BufferedImage frameToDraw;
+	private transient Animator background_Animator;
+    private transient BufferedImage frameToDraw;
 // Rows and columns to repeat our drawing and making it look even 
     private int columns = 15; // Number of columns to draw
     private int rows = 8; // Number of rows to draw

@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Random;
 import java.awt.image.*;
 /*GameCanvas
@@ -61,7 +62,7 @@ public class GameCanvas extends Canvas implements Runnable {
            if( ! hashmap_powerup.containsKey(powerup)) {
         	   hashmap_powerup.put(powerup, powerUpBounds);
            }
-            System.out.println(hashmap_powerup);
+//            System.out.println(hashmap_powerup);
             
 //            arraylist_powerUps_Bounds.add(powerUpBounds);
 			gameManager.addGameObject(powerup);
@@ -70,6 +71,34 @@ public class GameCanvas extends Canvas implements Runnable {
 	// Also adding keylistener to our canvas 
 		this.addKeyListener(keyboard);
 	}
+	// _____________________________________________________________________
+	// _____________________________________________________________________
+
+	public void save_game() {
+		System.out.println("Linkedlist is here :"+gameManager.getGameObjects());
+		LinkedListFileIO.saveLinkedListToFile(gameManager.getGameObjects(), "myLinkedList.txt");
+		
+	}
+	// _____________________________________________________________________
+	// _____________________________________________________________________
+
+	public static void resume_game() {
+		
+		LinkedList<GameObject> loadedGameObjects = LinkedListFileIO.loadLinkedListFromFile("myLinkedList.txt");
+		if (loadedGameObjects!=null) {
+			 System.out.println("Data found");
+	
+			System.out.println(loadedGameObjects);
+			for (GameObject obj : loadedGameObjects) {
+	            System.out.println(obj); // Assuming GameObject has a toString() method
+	           
+			}
+		}else {
+			System.out.println("No pervious data found");
+		}
+	}
+	
+	
 	// _____________________________________________________________________
 	// _____________________________________________________________________
 	// Method remove object from game manager
