@@ -44,6 +44,7 @@ public class GameManager {
 	// _____________________________________________________________________
 	// _____________________________________________________________________
 	public void addGameObject(GameObject gameObject) {
+		System.out.println("Object added to Manager");
 		gameObjects.add(gameObject);
 	}
 

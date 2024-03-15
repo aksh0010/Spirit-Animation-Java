@@ -19,7 +19,7 @@ public class Main {
 //		System.out.println(GameCanvas.arraylist_powerUps_Bounds);
 		mainWindow.setVisible(true);
 		 // Load the GameObjects when the application starts
-		GameCanvas.resume_game();
+//		GameCanvas.resume_game();
      
 		gameCanvas.start();
 		 mainWindow.addWindowListener(new WindowAdapter() {

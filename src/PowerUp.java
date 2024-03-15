@@ -33,7 +33,9 @@ public class PowerUp extends GameObject {
 	// Here in tick() we simply call the animator's tick method
 	@Override
 	public void tick() {
-		powerAnimator.tick();
+		 if (powerAnimator != null) {
+	            powerAnimator.tick();
+	        }
 	}
 	
 	// _____________________________________________________________________
@@ -43,7 +45,11 @@ public class PowerUp extends GameObject {
 	public void render(Graphics2D g2d) {
 //		 g2d.setColor(Color.YELLOW);
 //		 g2d.fillRect((int)x, (int)y, power_up_width, power_up_height);
-		g2d.drawImage(powerAnimator.currentFrame.getScaledInstance(power_up_width, power_up_height, Image.SCALE_SMOOTH), (int) x, (int) y, power_up_width, power_up_height, null);
+	
+		 if (powerAnimator != null && powerAnimator.currentFrame != null) {
+	            g2d.drawImage(powerAnimator.currentFrame.getScaledInstance(power_up_width, power_up_height, Image.SCALE_SMOOTH), (int) x, (int) y, power_up_width, power_up_height, null);
+	        }
+//		g2d.drawImage(powerAnimator.currentFrame.getScaledInstance(power_up_width, power_up_height, Image.SCALE_SMOOTH), (int) x, (int) y, power_up_width, power_up_height, null);
 	}
 	
 	// _____________________________________________________________________
@@ -64,4 +70,5 @@ public class PowerUp extends GameObject {
 	public int getPowerUpHeight() {
 		return power_up_height;
 	}
+	
 }

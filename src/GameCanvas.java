@@ -25,7 +25,7 @@ public class GameCanvas extends Canvas implements Runnable {
 	private Background background = new Background(0, 0);
 	private Player player = new Player(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
 //	Creating hashmap to store Newly created powerup objects and their Rectangle for collision detection
-	public static HashMap<PowerUp, Rectangle> hashmap_powerup = new HashMap<>() ;
+	public static HashMap<PowerUp, Rectangle> hashmap_powerup ;
 	
 // GameManager object making it static to ensure only copy
 	private static GameManager gameManager = new GameManager();
@@ -38,7 +38,8 @@ public class GameCanvas extends Canvas implements Runnable {
 // _____________________________________________________________________
 // _____________________________________________________________________	
 	public GameCanvas() {
-		
+		 // Initialize hashmap_powerup
+	    hashmap_powerup = new HashMap<>();
 		// Focusing camera on background so it doesnot move around
 		camera = new Camera(background);
 	
@@ -47,6 +48,21 @@ public class GameCanvas extends Canvas implements Runnable {
 		gameManager.addGameObject(player);
 		gameManager.addGameObject(camera);
 
+		 LinkedList<GameObject> loadedGameObjects = LinkedListFileIO.loadLinkedListFromFile("myLinkedList.txt");
+	     /*   if (loadedGameObjects != null) {
+	            for (GameObject obj : loadedGameObjects) {
+	                if (obj instanceof PowerUp) {
+	                    PowerUp powerup = (PowerUp) obj;
+	                    System.out.println("Inside GameCanvas : Object loading "+ obj+"New object:"+ powerup);
+	                    Rectangle powerUpBounds = new Rectangle((int) powerup.getX(), (int) powerup.getY(), powerup.getPowerUpWidth(), powerup.getPowerUpHeight());
+	                    hashmap_powerup.put(powerup, powerUpBounds);
+	                    gameManager.addGameObject(powerup);
+	                    System.out.println("Hashmap is :"+hashmap_powerup);
+	                }
+	            }
+	        } else {
+		*/
+		
 		
 		// Here creating powerups objects and storing them in hashmap
 		for (int i =0 ; i <total_powerup;i++) {
@@ -66,7 +82,9 @@ public class GameCanvas extends Canvas implements Runnable {
             
 //            arraylist_powerUps_Bounds.add(powerUpBounds);
 			gameManager.addGameObject(powerup);
-		}
+		} 
+		
+//	}
 		
 	// Also adding keylistener to our canvas 
 		this.addKeyListener(keyboard);
