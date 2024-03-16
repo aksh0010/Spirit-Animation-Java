@@ -32,6 +32,7 @@ public class GameManager {
 	            g2d.fillRect(i*64, j*64, 60, 60);
 	        }   
 	    }
+	    
 	    // created linkedlist to have latest objects
 	    // as we we dont we cant get the latest linked list
 	    // after the removal of object and might runinto errors
